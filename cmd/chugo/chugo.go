@@ -9,6 +9,8 @@ import (
 	"sync"
 
 	"cloud.google.com/go/pubsub"
+	"github.com/moorage/cloud-hugo/pkg/config"
+	"github.com/moorage/cloud-hugo/pkg/subscr"
 )
 
 const subName = "book-worker-sub"
@@ -22,14 +24,9 @@ var (
 
 func main() {
 	ctx := context.Background()
-	projectID := "test-project"
-	topicID := "my-topic"
+	cfg := config.New()
 
-	// Creates a client.
-	client, err := pubsub.NewClient(ctx, projectID)
-	if err != nil {
-		log.Fatalf("Failed to create client: %v", err)
-	}
+	client := subscr.New(cfg)
 
 	topic := client.Topic(topicID)
 
