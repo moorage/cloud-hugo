@@ -34,6 +34,7 @@ func New(ctx context.Context, cfg *config.Config) *SubClient {
 }
 
 func (sc *SubClient) InitTopic(topicName string) (*pubsub.Topic, error) {
+	log.Println("Initializing topic " + topicName)
 	topic := sc.client.Topic(topicName)
 
 	exists, err := topic.Exists(sc.ctx)
@@ -50,12 +51,15 @@ func (sc *SubClient) InitTopic(topicName string) (*pubsub.Topic, error) {
 func (sc *SubClient) InitSubscription(subName string, topic *pubsub.Topic) (*pubsub.Subscription, error) {
 	// Create topic subscription if it does not yet exist.
 	var subscription *pubsub.Subscription
+	log.Println("Initializing subscription " + subName)
 	subscription = sc.client.Subscription(subName)
 	exists, err := subscription.Exists(sc.ctx)
 	if err != nil {
 		return nil, fmt.Errorf("Error checking for subscription: %v", err)
 	}
 	if !exists {
+		log.Println("Creating subscription " + subName + " as it doesn't exist")
+
 		if subscription, err = sc.client.CreateSubscription(sc.ctx, subName, pubsub.SubscriptionConfig{Topic: topic}); err != nil {
 			return nil, fmt.Errorf("Failed to create subscription: %v", err)
 		}

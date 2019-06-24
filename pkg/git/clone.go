@@ -2,6 +2,7 @@ package git
 
 import (
 	"path/filepath"
+	"strings"
 
 	git "gopkg.in/src-d/go-git.v4"
 )
@@ -13,4 +14,10 @@ func (gc *GitClient) Clone(name, url string) (*git.Repository, error) {
 		RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
 	})
 
+}
+
+func ExtractNameFromGitURL(urlStr string) string {
+	url := strings.Split(urlStr, "/")
+	gitPath := url[len(url)-1]
+	return strings.TrimSuffix(gitPath, ".git")
 }

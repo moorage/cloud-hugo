@@ -15,5 +15,8 @@
 # the google cloud pub sub credentials
 credentials.json
 
+# the binary
+chugo
+
 # Dependency directories (remove the comment below to include it)
 # vendor/
