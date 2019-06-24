@@ -18,41 +18,24 @@ const subName = "book-worker-sub"
 var (
 	countMu sync.Mutex
 	count   int
-
-	subscription *pubsub.Subscription
 )
 
 func main() {
 	ctx := context.Background()
 	cfg := config.New()
 
-	client := subscr.New(cfg)
+	client := subscr.New(ctx, cfg)
 
-	topic := client.Topic(topicID)
-
-	exists, err := topic.Exists(ctx)
-
+	topic, err := client.InitTopic(cfg.TopicName)
 	if err != nil {
-		log.Fatalln("Failed to get the topic")
+		log.Fatalln(err)
 	}
-	if !exists {
-		log.Fatalf("The %s topic ID doesn't exist. The topic needs to be created by the publisher", topicID)
-	}
-
-	// Create topic subscription if it does not yet exist.
-	subscription = client.Subscription(subName)
-	exists, err = subscription.Exists(ctx)
+	subscription, err := client.InitSubscription(subName, topic)
 	if err != nil {
-		log.Fatalf("Error checking for subscription: %v", err)
+		log.Fatalln(err)
 	}
-	if !exists {
-		if _, err = client.CreateSubscription(ctx, subName, pubsub.SubscriptionConfig{Topic: topic}); err != nil {
-			log.Fatalf("Failed to create subscription: %v", err)
-		}
-	}
-
 	// Start worker goroutine.
-	go subscribe()
+	go subscribe(subscription)
 
 	port := "8080"
 	if p := os.Getenv("PORT"); p != "" {
@@ -62,7 +45,7 @@ func main() {
 	// [END http]
 }
 
-func subscribe() {
+func subscribe(subscription *pubsub.Subscription) {
 	ctx := context.Background()
 	err := subscription.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
 		var id int64
