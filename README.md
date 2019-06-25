@@ -28,3 +28,7 @@ cp /tmp/caddy ./
 eg - https://github.com/cloudacademy/static-website-example.git
 
 - now goto [http://localhost:8081/\[repo-name\]](http://localhost:8081/static-website-example)
+
+### Testing update to the repo
+
+- send the same message like the one sent for cloning the repo, chugo is smart enough to decide if a pull is needed or clone
