@@ -10,6 +10,7 @@ type Config struct {
 	ProjectID string `default:"cloud-hugo-test"`
 	TopicName string `default:"chugo-run-requests"`
 	Env       string `default:"dev"`
+	BaseDir   string `default:"./repos"`
 }
 
 // New creates a Config struct populating the Config folder with env variables having prefix

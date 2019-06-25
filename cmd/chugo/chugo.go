@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +9,8 @@ import (
 
 	"cloud.google.com/go/pubsub"
 	"github.com/moorage/cloud-hugo/pkg/config"
+	"github.com/moorage/cloud-hugo/pkg/handlers"
+
 	"github.com/moorage/cloud-hugo/pkg/subscr"
 )
 
@@ -34,8 +35,10 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	manager := handlers.NewManager(cfg)
 	// Start worker goroutine.
-	go subscribe(subscription)
+	go subscribe(subscription, manager)
 
 	port := "8080"
 	if p := os.Getenv("PORT"); p != "" {
@@ -45,25 +48,9 @@ func main() {
 	// [END http]
 }
 
-func subscribe(subscription *pubsub.Subscription) {
+func subscribe(subscription *pubsub.Subscription, manager *handlers.Manager) {
 	ctx := context.Background()
-	err := subscription.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
-		var id int64
-		if err := json.Unmarshal(msg.Data, &id); err != nil {
-			log.Printf("could not decode message data: %#v", msg)
-			msg.Ack()
-			return
-		}
-
-		log.Printf("[ID %d] Processing.", id)
-
-		countMu.Lock()
-		count++
-		countMu.Unlock()
-
-		msg.Ack()
-		log.Printf("[ID %d] ACK", id)
-	})
+	err := subscription.Receive(ctx, manager.HandleGitMsg)
 	if err != nil {
 		log.Fatal(err)
 	}
