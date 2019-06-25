@@ -37,9 +37,10 @@ func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	}
 
 	log.Printf("[Msg %+v] Processing.", gitMsg)
-	// Need to implement this
-	// hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
-
+	err := hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
+	if err != nil {
+		log.Println("There was an error while processing ", err.Error())
+	}
 	msg.Ack()
 	log.Printf("[Msg] ACK")
 }

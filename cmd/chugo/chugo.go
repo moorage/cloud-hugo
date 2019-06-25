@@ -14,7 +14,7 @@ import (
 	"github.com/moorage/cloud-hugo/pkg/subscr"
 )
 
-const subName = "book-worker-sub"
+const subName = "chugo-run-requests-sub"
 
 var (
 	countMu sync.Mutex

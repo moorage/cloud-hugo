@@ -20,3 +20,13 @@ chugo
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+
+# the repositories
+repos
+
+# caddy binary
+caddy
+
+# access logs
+chugo-access.log

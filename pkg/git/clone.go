@@ -8,12 +8,11 @@ import (
 )
 
 // Clone clones the repository with the given url to the base dir
-func (gc *GitClient) Clone(name, url string) (*git.Repository, error) {
-	return git.PlainClone(filepath.Join(gc.BaseDir, name), false, &git.CloneOptions{
-		URL:               url,
+func (gc *GitClient) Clone(urlStr string) (*git.Repository, error) {
+	return git.PlainClone(filepath.Join(gc.BaseDir, ExtractNameFromGitURL(urlStr)), false, &git.CloneOptions{
+		URL:               urlStr,
 		RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
 	})
-
 }
 
 func ExtractNameFromGitURL(urlStr string) string {

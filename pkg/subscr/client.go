@@ -34,7 +34,7 @@ func New(ctx context.Context, cfg *config.Config) *SubClient {
 }
 
 // InitTopic checks if a topic exists and it does then returns it else error out because
-// creating a topic is publisher's job
+// creating a topic is publisher's
 func (sc *SubClient) InitTopic(topicName string) (*pubsub.Topic, error) {
 	log.Println("Initializing topic " + topicName)
 	topic := sc.client.Topic(topicName)

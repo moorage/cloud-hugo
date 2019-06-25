@@ -1,0 +1,4 @@
+localhost:8081
+gzip
+log chugo-access.log
+root ./repos
