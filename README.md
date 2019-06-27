@@ -2,15 +2,15 @@
 
 A CMS which internally uses hugo and provides a clean and user friendly way to edit, build and deploy static sites
 
-# How to
+## How to run the subscriber
 
 - Build the binary
 ```
-go build ./cmd/chugo/
+go build ./cmd/subscriber/
 ```
 - we use google pub/sub so create a service account with `Pub/Sub Editor` role and download the json
-- rename that file to `credentials.json` and place it in the same dir as the `chugo` binary
-- run the chugo binary from the root folder
+- rename that file to `credentials.json` and place it in the same dir as the `subscriber` binary
+- run the subscriber binary from the root folder
 - download caddy by running the below commands in cloud-hugo dir or run the `./scripts/download-caddy.sh`
 ```bash
 wget -O /tmp/caddy.tar.gz https://caddyserver.com/download/linux/amd64?license=personal
@@ -31,4 +31,4 @@ eg - https://github.com/cloudacademy/static-website-example.git
 
 ### Testing update to the repo
 
-- send the same message like the one sent for cloning the repo, chugo is smart enough to decide if a pull is needed or clone
+- send the same message like the one sent for cloning the repo, subscriber is smart enough to decide if a pull is needed or clone
