@@ -7,6 +7,7 @@ import (
 
 	"github.com/moorage/cloud-hugo/pkg/config"
 	"github.com/moorage/cloud-hugo/pkg/git"
+	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 
 	"cloud.google.com/go/pubsub"
 )
@@ -16,6 +17,7 @@ type GitMsg struct {
 	GitURL string `json:"git_url"`
 	// Github access token for private repos
 	AccessToken string `json:"access_token,omitempty"`
+	UserName string `json:"user_name,omitempty"`
 }
 
 // Manager provides handlers for handling all kinds of message which can be sent by the publisher
@@ -42,10 +44,19 @@ func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	}
 
 	log.Printf("[Msg %+v] Processing.", gitMsg)
-	err := hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
-	if err != nil {
-		log.Println("There was an error while processing ", err.Error())
+	if gitMsg.AccessToken != "" || gitMsg.UserName != "" {
+		hdlr.gitClient.CloneOrPullWithAuth(gitMsg.GitURL,
+		&http.BasicAuth{
+			Username: gitMsg.UserName, // yes, this can be anything except an empty string
+			Password: gitMsg.AccessToken,
+		})
+	} else {
+		err := hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
+		if err != nil {
+			log.Println("There was an error while processing ", err.Error())
+		}
 	}
+
 	msg.Ack()
 	log.Printf("[Msg] ACK")
 }
