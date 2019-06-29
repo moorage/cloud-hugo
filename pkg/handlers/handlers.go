@@ -14,13 +14,17 @@ import (
 // GitMsg is the message which a publisher sends when a repo needs to be cloned or pulled
 type GitMsg struct {
 	GitURL string `json:"git_url"`
+	// Github access token for private repos
+	AccessToken string `json:"access_token,omitempty"`
 }
 
+// Manager provides handlers for handling all kinds of message which can be sent by the publisher
 type Manager struct {
 	cfg       *config.SubscriberConfig
 	gitClient *git.GitClient
 }
 
+// NewManager initializes a Manager
 func NewManager(cfg *config.SubscriberConfig) *Manager {
 	return &Manager{
 		cfg:       cfg,
@@ -28,6 +32,7 @@ func NewManager(cfg *config.SubscriberConfig) *Manager {
 	}
 }
 
+// HandleGitMsg  handles the git message sent by the publisher
 func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	var gitMsg GitMsg
 	if err := json.Unmarshal(msg.Data, &gitMsg); err != nil {

@@ -23,7 +23,10 @@ var (
 
 func main() {
 	ctx := context.Background()
-	cfg := config.NewSubsciber()
+	cfg, err := config.NewSubsciber()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	client := subscr.New(ctx, cfg)
 
