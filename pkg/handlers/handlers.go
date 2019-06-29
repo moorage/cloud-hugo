@@ -15,9 +15,6 @@ import (
 // GitMsg is the message which a publisher sends when a repo needs to be cloned or pulled
 type GitMsg struct {
 	GitURL string `json:"git_url"`
-	// Github access token for private repos
-	AccessToken string `json:"access_token,omitempty"`
-	UserName string `json:"user_name,omitempty"`
 }
 
 // Manager provides handlers for handling all kinds of message which can be sent by the publisher
@@ -44,12 +41,12 @@ func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	}
 
 	log.Printf("[Msg %+v] Processing.", gitMsg)
-	if gitMsg.AccessToken != "" || gitMsg.UserName != "" {
+	if hdlr.cfg.AccessToken != "" || hdlr.cfg.UserName != "" {
 		hdlr.gitClient.CloneOrPullWithAuth(gitMsg.GitURL,
-		&http.BasicAuth{
-			Username: gitMsg.UserName, // yes, this can be anything except an empty string
-			Password: gitMsg.AccessToken,
-		})
+			&http.BasicAuth{
+				Username: hdlr.cfg.UserName, // yes, this can be anything except an empty string
+				Password: hdlr.cfg.AccessToken,
+			})
 	} else {
 		err := hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
 		if err != nil {

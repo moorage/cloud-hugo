@@ -14,6 +14,7 @@ type CommonConfig struct {
 	TopicName   string `default:"chugo-run-requests"`
 	Env         string `default:"dev"`
 	AccessToken string
+	UserName    string
 }
 
 // SubscriberConfig is the config for the subscriber
@@ -22,20 +23,39 @@ type SubscriberConfig struct {
 	BaseDir string `default:"./repos"`
 }
 
+// PublisherConfig is the config for the publisher
 type PublisherConfig struct {
 	*CommonConfig
+	RepoURL string `json:"repo_url"`
 }
 
-// NewSubsciber creates a Config struct populating the Config folder with env variables having prefix
-// "CHUGO_"
-func NewSubsciber() (*SubscriberConfig, error) {
+// NewSubsciberConfig creates a Config struct populating the Config with env variables having prefix
+// "CHUGO_SUB"
+func NewSubsciberConfig() (*SubscriberConfig, error) {
 	var subConf SubscriberConfig
 	err := LoadFromFile("sub-config.json", &subConf)
 
 	if err != nil {
 		return nil, err
 	}
-	err = envconfig.Process("CHUGO", &subConf)
+	err = envconfig.Process("CHUGO_SUB", &subConf)
+	if err != nil {
+		return nil, err
+	}
+
+	return &subConf, nil
+}
+
+// NewPublisherConfig creates a Config struct populating the Config with env variables having prefix
+// "CHUGO_PUB"
+func NewPublisherConfig() (*PublisherConfig, error) {
+	var subConf PublisherConfig
+	err := LoadFromFile("pub-config.json", &subConf)
+
+	if err != nil {
+		return nil, err
+	}
+	err = envconfig.Process("CHUGO_PUB", &subConf)
 	if err != nil {
 		return nil, err
 	}

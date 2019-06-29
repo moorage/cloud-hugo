@@ -68,7 +68,6 @@ func (sc *SubClient) InitSubscription(subName string, topic *pubsub.Topic) (*pub
 	}
 
 	return subscription, err
-
 }
 
 func (sc *SubClient) GetCurrentTopic() *pubsub.Topic {

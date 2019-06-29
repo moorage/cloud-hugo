@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"sync"
 
 	"cloud.google.com/go/pubsub"
 	"github.com/moorage/cloud-hugo/pkg/config"
@@ -16,14 +15,9 @@ import (
 
 const subName = "chugo-run-requests-sub"
 
-var (
-	countMu sync.Mutex
-	count   int
-)
-
 func main() {
 	ctx := context.Background()
-	cfg, err := config.NewSubsciber()
+	cfg, err := config.NewSubsciberConfig()
 	if err != nil {
 		log.Fatalln(err)
 	}
