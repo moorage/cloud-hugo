@@ -23,7 +23,7 @@ var (
 
 func main() {
 	ctx := context.Background()
-	cfg := config.New()
+	cfg := config.NewSubsciber()
 
 	client := subscr.New(ctx, cfg)
 

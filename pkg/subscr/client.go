@@ -15,12 +15,12 @@ import (
 // SubClient holds handling of a single topic
 type SubClient struct {
 	client *pubsub.Client
-	cfg    *config.Config
+	cfg    *config.SubscriberConfig
 	ctx    context.Context
 	topic  *pubsub.Topic
 }
 
-func New(ctx context.Context, cfg *config.Config) *SubClient {
+func New(ctx context.Context, cfg *config.SubscriberConfig) *SubClient {
 	client, err := pubsub.NewClient(ctx, cfg.ProjectID, option.WithCredentialsFile(cfg.CredFile))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)

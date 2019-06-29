@@ -17,11 +17,11 @@ type GitMsg struct {
 }
 
 type Manager struct {
-	cfg       *config.Config
+	cfg       *config.SubscriberConfig
 	gitClient *git.GitClient
 }
 
-func NewManager(cfg *config.Config) *Manager {
+func NewManager(cfg *config.SubscriberConfig) *Manager {
 	return &Manager{
 		cfg:       cfg,
 		gitClient: git.NewClient(cfg.BaseDir),
