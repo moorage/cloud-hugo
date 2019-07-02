@@ -49,18 +49,18 @@ func NewSubsciberConfig() (*SubscriberConfig, error) {
 // NewPublisherConfig creates a Config struct populating the Config with env variables having prefix
 // "CHUGO_PUB"
 func NewPublisherConfig() (*PublisherConfig, error) {
-	var subConf PublisherConfig
-	err := LoadFromFile("pub-config.json", &subConf)
+	var pubConf PublisherConfig
+	err := LoadFromFile("pub-config.json", &pubConf)
 
 	if err != nil {
 		return nil, err
 	}
-	err = envconfig.Process("CHUGO_PUB", &subConf)
+	err = envconfig.Process("CHUGO_PUB", &pubConf)
 	if err != nil {
 		return nil, err
 	}
 
-	return &subConf, nil
+	return &pubConf, nil
 }
 
 // LoadFromFile gets the config from a file

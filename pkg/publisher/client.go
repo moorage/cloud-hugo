@@ -19,7 +19,7 @@ type PubClient struct {
 }
 
 // New creates a publisher client
-func New(ctx context.Context, cfg config.PublisherConfig) *PubClient {
+func New(ctx context.Context, cfg *config.PublisherConfig) *PubClient {
 	client, err := pubsub.NewClient(ctx, cfg.ProjectID, option.WithCredentialsFile(cfg.CredFile))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
@@ -33,6 +33,9 @@ func New(ctx context.Context, cfg config.PublisherConfig) *PubClient {
 
 // CreateOrInitTopic checks if a topic exists and it does then returns it else creates it
 func (pcl *PubClient) CreateOrInitTopic(topicName string) (*pubsub.Topic, error) {
+	if pcl.topic != nil {
+		return pcl.topic, nil
+	}
 	log.Println("Initializing topic " + topicName)
 	topic := pcl.client.Topic(topicName)
 

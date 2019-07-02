@@ -8,8 +8,6 @@ import (
 
 	"cloud.google.com/go/pubsub"
 	"github.com/moorage/cloud-hugo/pkg/config"
-	"github.com/moorage/cloud-hugo/pkg/handlers"
-
 	"github.com/moorage/cloud-hugo/pkg/subscr"
 )
 
@@ -33,7 +31,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	manager := handlers.NewManager(cfg)
+	manager := subscr.NewManager(cfg)
 	// Start worker goroutine.
 	go subscribe(subscription, manager)
 
@@ -45,7 +43,7 @@ func main() {
 	// [END http]
 }
 
-func subscribe(subscription *pubsub.Subscription, manager *handlers.Manager) {
+func subscribe(subscription *pubsub.Subscription, manager *subscr.Manager) {
 	ctx := context.Background()
 	err := subscription.Receive(ctx, manager.HandleGitMsg)
 	if err != nil {
