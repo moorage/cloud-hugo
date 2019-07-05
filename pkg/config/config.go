@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"errors"
 	"os"
 
 	"github.com/kelseyhightower/envconfig"
@@ -60,7 +61,19 @@ func NewPublisherConfig() (*PublisherConfig, error) {
 		return nil, err
 	}
 
+	if err = pubConf.Validate(); err != nil {
+		return nil, err
+	}
+
 	return &pubConf, nil
+}
+
+// Validate validates a publisher config
+func (pcg *PublisherConfig) Validate() error {
+	if pcg.RepoURL == "" {
+		return errors.New("Repository URL must be provided in the config")
+	}
+	return nil
 }
 
 // LoadFromFile gets the config from a file
