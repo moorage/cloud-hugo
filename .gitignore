@@ -25,8 +25,11 @@ subscriber
 # vendor/
 
 
-# the repositories
-repos
+# the repository
+repo
+
+# the publisher side website
+website 
 
 # caddy binary
 caddy

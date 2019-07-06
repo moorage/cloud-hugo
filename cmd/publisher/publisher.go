@@ -6,11 +6,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/moorage/cloud-hugo/pkg/config"
+	"github.com/moorage/cloud-hugo/pkg/git"
 	"github.com/moorage/cloud-hugo/pkg/publisher"
+	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 )
 
 func baseRouter(engine *gin.Engine) *gin.RouterGroup {
-
 	v1 := engine.Group("/api/v1")
 	v1.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -21,6 +22,7 @@ func baseRouter(engine *gin.Engine) *gin.RouterGroup {
 }
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
 	ctx := context.Background()
 	cfg, err := config.NewPublisherConfig()
 	if err != nil {
@@ -28,6 +30,26 @@ func main() {
 	}
 
 	client := publisher.New(ctx, cfg)
+	gitClient := git.NewClient(cfg.BaseDir)
+
+	log.Println("Initial Website sync")
+	if cfg.AccessToken != "" && cfg.UserName != "" {
+		log.Println("Cloning with token")
+		err := gitClient.CloneOrPullWithAuth(cfg.RepoURL,
+			&http.BasicAuth{
+				Username: cfg.UserName,
+				Password: cfg.AccessToken,
+			})
+
+		if err != nil {
+			log.Fatalln(err)
+		}
+	} else {
+		err := gitClient.CloneOrPull(cfg.RepoURL)
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}
 
 	_, err = client.CreateOrInitTopic(cfg.TopicName)
 
@@ -37,5 +59,6 @@ func main() {
 
 	engine := gin.Default()
 	baseRouter(engine)
+	log.Println("Listening on 8080")
 	engine.Run()
 }

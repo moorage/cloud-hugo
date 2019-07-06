@@ -21,13 +21,16 @@ type CommonConfig struct {
 // SubscriberConfig is the config for the subscriber
 type SubscriberConfig struct {
 	*CommonConfig
-	BaseDir string `default:"./repos"`
+	BaseDir string `default:"./repo"`
 }
 
 // PublisherConfig is the config for the publisher
 type PublisherConfig struct {
 	*CommonConfig
 	RepoURL string `json:"repo_url"`
+	// reason for this default being website is because this is more user facing then the
+	// subscriber
+	BaseDir string `default:"./website"`
 }
 
 // NewSubsciberConfig creates a Config struct populating the Config with env variables having prefix
