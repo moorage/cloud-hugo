@@ -34,7 +34,8 @@ func NewManager(cfg *config.SubscriberConfig) *Manager {
 // HandleGitMsg  handles the git message sent by the publisher
 func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	var gitMsg GitMsg
-	if err := json.Unmarshal(msg.Data, &gitMsg); err != nil {
+	var err error
+	if err = json.Unmarshal(msg.Data, &gitMsg); err != nil {
 		log.Printf("could not decode message data: %#v", msg)
 		msg.Ack()
 		return
@@ -42,19 +43,23 @@ func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 
 	log.Printf("[Msg %+v] Processing.", gitMsg)
 	if hdlr.cfg.AccessToken != "" || hdlr.cfg.UserName != "" {
-		hdlr.gitClient.CloneOrPullWithAuth(gitMsg.GitURL,
+		err = hdlr.gitClient.CloneOrPullWithAuth(gitMsg.GitURL,
 			&http.BasicAuth{
 				Username: hdlr.cfg.UserName, // yes, this can be anything except an empty string
 				Password: hdlr.cfg.AccessToken,
 			})
 	} else {
-		err := hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
-		if err != nil {
-			log.Println("There was an error while processing ", err.Error())
-		}
+		err = hdlr.gitClient.CloneOrPull(gitMsg.GitURL)
+	}
+	if err != nil {
+		log.Println("There was an error while processing ", err.Error())
+	}
+
+	err = hdlr.CopyFilesForHosting(gitMsg.GitURL)
+	if err != nil {
+		log.Println("There was an error while copying ", err.Error())
 	}
 
 	msg.Ack()
 	log.Printf("[Msg] ACK")
 }
-

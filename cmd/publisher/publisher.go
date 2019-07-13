@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"log"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/moorage/cloud-hugo/pkg/config"
 	"github.com/moorage/cloud-hugo/pkg/git"
+	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/publisher"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 )
@@ -57,6 +59,13 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	hugoBuilder := builder.NewHugoBuilder(cfg)
+
+	output, err := hugoBuilder.Build()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(output)
 	engine := gin.Default()
 	baseRouter(engine)
 	log.Println("Listening on 8080")

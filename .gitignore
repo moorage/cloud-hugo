@@ -39,3 +39,7 @@ chugo-access.log
 
 # vs code
 .vscode
+
+# pub sub configs
+pub-config.json
+sub-config.json
