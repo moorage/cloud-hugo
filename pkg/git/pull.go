@@ -11,7 +11,7 @@ import (
 )
 
 func (gc *GitClient) Pull(urlStr string) error {
-	// We instance\iate a new repository targeting the given path (the .git folder)
+	// We instanciate a new repository targeting the given path (the .git folder)
 	repoPath := filepath.Join(gc.BaseDir, utils.ExtractNameFromGitURL(urlStr))
 	r, err := git.PlainOpen(repoPath)
 	if err != nil {
