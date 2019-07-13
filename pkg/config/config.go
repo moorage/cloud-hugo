@@ -21,7 +21,8 @@ type CommonConfig struct {
 // SubscriberConfig is the config for the subscriber
 type SubscriberConfig struct {
 	*CommonConfig
-	BaseDir string `default:"./repo"`
+	BaseDir    string `default:"./repo"`
+	HostingDir string `default:"./www"`
 }
 
 // PublisherConfig is the config for the publisher

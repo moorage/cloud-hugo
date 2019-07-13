@@ -57,3 +57,4 @@ func (hdlr *Manager) HandleGitMsg(ctx context.Context, msg *pubsub.Message) {
 	msg.Ack()
 	log.Printf("[Msg] ACK")
 }
+

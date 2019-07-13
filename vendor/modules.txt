@@ -6,64 +6,6 @@ cloud.google.com/go/internal/version
 cloud.google.com/go/pubsub/apiv1
 cloud.google.com/go/pubsub/internal/distribution
 cloud.google.com/go/compute/metadata
-# github.com/BurntSushi/locker v0.0.0-20171006230638-a6e239ea1c69
-github.com/BurntSushi/locker
-# github.com/BurntSushi/toml v0.3.1
-github.com/BurntSushi/toml
-# github.com/PuerkitoBio/purell v1.1.0
-github.com/PuerkitoBio/purell
-# github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
-github.com/PuerkitoBio/urlesc
-# github.com/alecthomas/chroma v0.6.3
-github.com/alecthomas/chroma
-github.com/alecthomas/chroma/formatters
-github.com/alecthomas/chroma/formatters/html
-github.com/alecthomas/chroma/lexers
-github.com/alecthomas/chroma/styles
-github.com/alecthomas/chroma/lexers/a
-github.com/alecthomas/chroma/lexers/b
-github.com/alecthomas/chroma/lexers/c
-github.com/alecthomas/chroma/lexers/circular
-github.com/alecthomas/chroma/lexers/d
-github.com/alecthomas/chroma/lexers/e
-github.com/alecthomas/chroma/lexers/f
-github.com/alecthomas/chroma/lexers/g
-github.com/alecthomas/chroma/lexers/h
-github.com/alecthomas/chroma/lexers/i
-github.com/alecthomas/chroma/lexers/internal
-github.com/alecthomas/chroma/lexers/j
-github.com/alecthomas/chroma/lexers/k
-github.com/alecthomas/chroma/lexers/l
-github.com/alecthomas/chroma/lexers/m
-github.com/alecthomas/chroma/lexers/n
-github.com/alecthomas/chroma/lexers/o
-github.com/alecthomas/chroma/lexers/p
-github.com/alecthomas/chroma/lexers/q
-github.com/alecthomas/chroma/lexers/r
-github.com/alecthomas/chroma/lexers/s
-github.com/alecthomas/chroma/lexers/t
-github.com/alecthomas/chroma/lexers/v
-github.com/alecthomas/chroma/lexers/w
-github.com/alecthomas/chroma/lexers/x
-github.com/alecthomas/chroma/lexers/y
-# github.com/bep/gitmap v1.0.0
-github.com/bep/gitmap
-# github.com/bep/go-tocss v0.6.0
-github.com/bep/go-tocss/scss
-github.com/bep/go-tocss/scss/libsass
-github.com/bep/go-tocss/tocss
-# github.com/chaseadamsio/goorgeous v1.1.0
-github.com/chaseadamsio/goorgeous
-# github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964
-github.com/danwakefield/fnmatch
-# github.com/disintegration/imaging v1.6.0
-github.com/disintegration/imaging
-# github.com/dlclark/regexp2 v1.1.6
-github.com/dlclark/regexp2
-github.com/dlclark/regexp2/syntax
-# github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385
-github.com/eknkc/amber
-github.com/eknkc/amber/parser
 # github.com/emirpasic/gods v1.12.0
 github.com/emirpasic/gods/trees/binaryheap
 github.com/emirpasic/gods/containers
@@ -71,8 +13,6 @@ github.com/emirpasic/gods/lists/arraylist
 github.com/emirpasic/gods/trees
 github.com/emirpasic/gods/utils
 github.com/emirpasic/gods/lists
-# github.com/fsnotify/fsnotify v1.4.7
-github.com/fsnotify/fsnotify
 # github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.4.0
@@ -80,104 +20,6 @@ github.com/gin-gonic/gin
 github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/json
 github.com/gin-gonic/gin/render
-# github.com/gobuffalo/envy v1.7.0
-github.com/gobuffalo/envy
-# github.com/gobwas/glob v0.2.3
-github.com/gobwas/glob
-github.com/gobwas/glob/compiler
-github.com/gobwas/glob/syntax
-github.com/gobwas/glob/match
-github.com/gobwas/glob/syntax/ast
-github.com/gobwas/glob/util/runes
-github.com/gobwas/glob/syntax/lexer
-github.com/gobwas/glob/util/strings
-# github.com/gohugoio/hugo v0.55.6
-github.com/gohugoio/hugo/deps
-github.com/gohugoio/hugo/helpers
-github.com/gohugoio/hugo/hugofs
-github.com/gohugoio/hugo/hugolib
-github.com/gohugoio/hugo/source
-github.com/gohugoio/hugo/cache/filecache
-github.com/gohugoio/hugo/common/loggers
-github.com/gohugoio/hugo/config
-github.com/gohugoio/hugo/langs
-github.com/gohugoio/hugo/media
-github.com/gohugoio/hugo/metrics
-github.com/gohugoio/hugo/output
-github.com/gohugoio/hugo/resources
-github.com/gohugoio/hugo/resources/page
-github.com/gohugoio/hugo/tpl
-github.com/gohugoio/hugo/bufferpool
-github.com/gohugoio/hugo/common/hugio
-github.com/gohugoio/hugo/common/hugo
-github.com/gohugoio/hugo/common/maps
-github.com/gohugoio/hugo/docshelper
-github.com/gohugoio/hugo/hugolib/filesystems
-github.com/gohugoio/hugo/hugolib/paths
-github.com/gohugoio/hugo/common/types
-github.com/gohugoio/hugo/cache
-github.com/gohugoio/hugo/common/collections
-github.com/gohugoio/hugo/common/herrors
-github.com/gohugoio/hugo/common/text
-github.com/gohugoio/hugo/common/urls
-github.com/gohugoio/hugo/compare
-github.com/gohugoio/hugo/config/privacy
-github.com/gohugoio/hugo/config/services
-github.com/gohugoio/hugo/i18n
-github.com/gohugoio/hugo/lazy
-github.com/gohugoio/hugo/navigation
-github.com/gohugoio/hugo/parser/metadecoders
-github.com/gohugoio/hugo/parser/pageparser
-github.com/gohugoio/hugo/publisher
-github.com/gohugoio/hugo/related
-github.com/gohugoio/hugo/resources/page/pagemeta
-github.com/gohugoio/hugo/resources/resource
-github.com/gohugoio/hugo/tpl/tplimpl
-github.com/gohugoio/hugo/common/terminal
-github.com/gohugoio/hugo/common/hreflect
-github.com/gohugoio/hugo/resources/internal
-github.com/gohugoio/hugo/common/math
-github.com/gohugoio/hugo/minifiers
-github.com/gohugoio/hugo/transform
-github.com/gohugoio/hugo/transform/livereloadinject
-github.com/gohugoio/hugo/transform/metainject
-github.com/gohugoio/hugo/transform/urlreplacers
-github.com/gohugoio/hugo/tpl/cast
-github.com/gohugoio/hugo/tpl/collections
-github.com/gohugoio/hugo/tpl/compare
-github.com/gohugoio/hugo/tpl/crypto
-github.com/gohugoio/hugo/tpl/data
-github.com/gohugoio/hugo/tpl/encoding
-github.com/gohugoio/hugo/tpl/fmt
-github.com/gohugoio/hugo/tpl/hugo
-github.com/gohugoio/hugo/tpl/images
-github.com/gohugoio/hugo/tpl/inflect
-github.com/gohugoio/hugo/tpl/internal
-github.com/gohugoio/hugo/tpl/lang
-github.com/gohugoio/hugo/tpl/math
-github.com/gohugoio/hugo/tpl/os
-github.com/gohugoio/hugo/tpl/partials
-github.com/gohugoio/hugo/tpl/path
-github.com/gohugoio/hugo/tpl/reflect
-github.com/gohugoio/hugo/tpl/resources
-github.com/gohugoio/hugo/tpl/safe
-github.com/gohugoio/hugo/tpl/site
-github.com/gohugoio/hugo/tpl/strings
-github.com/gohugoio/hugo/tpl/templates
-github.com/gohugoio/hugo/tpl/time
-github.com/gohugoio/hugo/tpl/tplimpl/embedded
-github.com/gohugoio/hugo/tpl/transform
-github.com/gohugoio/hugo/tpl/urls
-github.com/gohugoio/hugo/htesting
-github.com/gohugoio/hugo/resources/resource_factories/bundler
-github.com/gohugoio/hugo/resources/resource_factories/create
-github.com/gohugoio/hugo/resources/resource_transformers/integrity
-github.com/gohugoio/hugo/resources/resource_transformers/minifier
-github.com/gohugoio/hugo/resources/resource_transformers/postcss
-github.com/gohugoio/hugo/resources/resource_transformers/templates
-github.com/gohugoio/hugo/resources/resource_transformers/tocss/scss
-github.com/gohugoio/hugo/cache/namedmemcache
-github.com/gohugoio/hugo/parser
 # github.com/golang/protobuf v1.3.1
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -188,121 +30,37 @@ github.com/golang/protobuf/ptypes/empty
 github.com/golang/protobuf/protoc-gen-go/descriptor
 # github.com/googleapis/gax-go/v2 v2.0.4
 github.com/googleapis/gax-go/v2
-# github.com/hashicorp/go-immutable-radix v1.0.0
-github.com/hashicorp/go-immutable-radix
 # github.com/hashicorp/golang-lru v0.5.1
 github.com/hashicorp/golang-lru/simplelru
-# github.com/hashicorp/hcl v1.0.0
-github.com/hashicorp/hcl
-github.com/hashicorp/hcl/hcl/printer
-github.com/hashicorp/hcl/hcl/ast
-github.com/hashicorp/hcl/hcl/parser
-github.com/hashicorp/hcl/hcl/token
-github.com/hashicorp/hcl/json/parser
-github.com/hashicorp/hcl/hcl/scanner
-github.com/hashicorp/hcl/hcl/strconv
-github.com/hashicorp/hcl/json/scanner
-github.com/hashicorp/hcl/json/token
 # github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99
 github.com/jbenet/go-context/io
-# github.com/jdkato/prose v1.1.0
-github.com/jdkato/prose/transform
-github.com/jdkato/prose/internal/util
-# github.com/joho/godotenv v1.3.0
-github.com/joho/godotenv
 # github.com/json-iterator/go v1.1.6
 github.com/json-iterator/go
 # github.com/kelseyhightower/envconfig v1.4.0
 github.com/kelseyhightower/envconfig
 # github.com/kevinburke/ssh_config v0.0.0-20180830205328-81db2a75821e
 github.com/kevinburke/ssh_config
-# github.com/kyokomi/emoji v1.5.1
-github.com/kyokomi/emoji
-# github.com/magiconair/properties v1.8.0
-github.com/magiconair/properties
-# github.com/markbates/inflect v1.0.0
-github.com/markbates/inflect
 # github.com/mattn/go-isatty v0.0.7
 github.com/mattn/go-isatty
-# github.com/mattn/go-runewidth v0.0.3
-github.com/mattn/go-runewidth
-# github.com/miekg/mmark v1.3.6
-github.com/miekg/mmark
 # github.com/mitchellh/go-homedir v1.1.0
 github.com/mitchellh/go-homedir
-# github.com/mitchellh/hashstructure v1.0.0
-github.com/mitchellh/hashstructure
-# github.com/mitchellh/mapstructure v1.1.2
-github.com/mitchellh/mapstructure
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
-# github.com/muesli/smartcrop v0.0.0-20180228075044-f6ebaa786a12
-github.com/muesli/smartcrop
-github.com/muesli/smartcrop/options
-# github.com/nicksnyder/go-i18n v1.10.0
-github.com/nicksnyder/go-i18n/i18n/bundle
-github.com/nicksnyder/go-i18n/i18n/language
-github.com/nicksnyder/go-i18n/i18n/translation
-# github.com/olekukonko/tablewriter v0.0.0-20180506121414-d4647c9c7a84
-github.com/olekukonko/tablewriter
+# github.com/otiai10/copy v1.0.1
+github.com/otiai10/copy
 # github.com/pelletier/go-buffruneio v0.2.0
 github.com/pelletier/go-buffruneio
-# github.com/pelletier/go-toml v1.2.0
-github.com/pelletier/go-toml
-# github.com/pkg/errors v0.8.1
-github.com/pkg/errors
-# github.com/rogpeppe/go-internal v1.1.0
-github.com/rogpeppe/go-internal/modfile
-github.com/rogpeppe/go-internal/module
-github.com/rogpeppe/go-internal/semver
-# github.com/russross/blackfriday v1.5.2
-github.com/russross/blackfriday
 # github.com/sergi/go-diff v1.0.0
 github.com/sergi/go-diff/diffmatchpatch
-# github.com/shurcooL/sanitized_anchor_name v0.0.0-20170918181015-86672fcb3f95
-github.com/shurcooL/sanitized_anchor_name
-# github.com/spf13/afero v1.2.2
-github.com/spf13/afero
-github.com/spf13/afero/mem
-# github.com/spf13/cast v1.3.0
-github.com/spf13/cast
-# github.com/spf13/jwalterweatherman v1.1.0
-github.com/spf13/jwalterweatherman
-# github.com/spf13/pflag v1.0.3
-github.com/spf13/pflag
-# github.com/spf13/viper v1.3.2
-github.com/spf13/viper
 # github.com/src-d/gcfg v1.4.0
 github.com/src-d/gcfg
 github.com/src-d/gcfg/scanner
 github.com/src-d/gcfg/token
 github.com/src-d/gcfg/types
-# github.com/tdewolff/minify/v2 v2.3.7
-github.com/tdewolff/minify/v2
-github.com/tdewolff/minify/v2/css
-github.com/tdewolff/minify/v2/html
-github.com/tdewolff/minify/v2/js
-github.com/tdewolff/minify/v2/json
-github.com/tdewolff/minify/v2/svg
-github.com/tdewolff/minify/v2/xml
-# github.com/tdewolff/parse/v2 v2.3.5
-github.com/tdewolff/parse/v2
-github.com/tdewolff/parse/v2/buffer
-github.com/tdewolff/parse/v2/strconv
-github.com/tdewolff/parse/v2/css
-github.com/tdewolff/parse/v2/html
-github.com/tdewolff/parse/v2/js
-github.com/tdewolff/parse/v2/json
-github.com/tdewolff/parse/v2/svg
-github.com/tdewolff/parse/v2/xml
-# github.com/wellington/go-libsass v0.9.3-0.20181113175235-c63644206701
-github.com/wellington/go-libsass/libs
 # github.com/xanzy/ssh-agent v0.2.1
 github.com/xanzy/ssh-agent
-# github.com/yosssi/ace v0.0.5
-github.com/yosssi/ace
 # go.opencensus.io v0.21.0
 go.opencensus.io/plugin/ocgrpc
 go.opencensus.io/stats
@@ -338,26 +96,16 @@ golang.org/x/crypto/internal/chacha20
 golang.org/x/crypto/poly1305
 golang.org/x/crypto/ed25519/internal/edwards25519
 golang.org/x/crypto/internal/subtle
-# golang.org/x/image v0.0.0-20190321063152-3fc05d484e9f
-golang.org/x/image/webp
-golang.org/x/image/bmp
-golang.org/x/image/tiff
-golang.org/x/image/draw
-golang.org/x/image/riff
-golang.org/x/image/vp8
-golang.org/x/image/vp8l
-golang.org/x/image/tiff/lzw
-golang.org/x/image/math/f64
 # golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c
 golang.org/x/net/context
 golang.org/x/net/trace
-golang.org/x/net/idna
 golang.org/x/net/internal/timeseries
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
 golang.org/x/net/proxy
 golang.org/x/net/context/ctxhttp
 golang.org/x/net/http/httpguts
+golang.org/x/net/idna
 golang.org/x/net/internal/socks
 # golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 golang.org/x/oauth2
@@ -373,12 +121,10 @@ golang.org/x/sys/unix
 golang.org/x/sys/windows
 golang.org/x/sys/cpu
 # golang.org/x/text v0.3.2
-golang.org/x/text/runes
-golang.org/x/text/transform
-golang.org/x/text/unicode/norm
-golang.org/x/text/width
 golang.org/x/text/secure/bidirule
 golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+golang.org/x/text/transform
 # google.golang.org/api v0.6.0
 google.golang.org/api/option
 google.golang.org/api/support/bundler

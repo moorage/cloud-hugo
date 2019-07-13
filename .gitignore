@@ -36,3 +36,6 @@ caddy
 
 # access logs
 chugo-access.log
+
+# vs code
+.vscode
