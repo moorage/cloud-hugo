@@ -10,19 +10,19 @@ import (
 
 // CommonConfig is the global config used through out the application, both the publisher and subscriber
 type CommonConfig struct {
-	CredFile    string `default:"credentials.json"`
-	ProjectID   string `default:"cloud-hugo-test"`
-	TopicName   string `default:"chugo-run-requests"`
-	Env         string `default:"dev"`
-	AccessToken string
-	UserName    string
+	CredFile  string `default:"credentials.json"`
+	ProjectID string `default:"cloud-hugo-test"`
+	TopicName string `default:"chugo-run-requests"`
+	Env       string `default:"dev"`
 }
 
 // SubscriberConfig is the config for the subscriber
 type SubscriberConfig struct {
 	*CommonConfig
-	BaseDir    string `default:"./repo"`
-	HostingDir string `default:"./www"`
+	BaseDir     string `default:"./repo"`
+	HostingDir  string `default:"./www"`
+	AccessToken string `json:"access_token"`
+	UserName    string `json:"user_name"`
 }
 
 // PublisherConfig is the config for the publisher
@@ -31,7 +31,10 @@ type PublisherConfig struct {
 	RepoURL string `json:"repo_url"`
 	// reason for this default being website is because this is more user facing then the
 	// subscriber
-	BaseDir string `default:"./website"`
+	BaseDir     string `default:"./website"`
+	AccessToken string `json:"access_token"`
+	UserName    string `json:"user_name"`
+	UserEmail   string `json:"user_email"`
 }
 
 // NewSubsciberConfig creates a Config struct populating the Config with env variables having prefix
@@ -56,7 +59,6 @@ func NewSubsciberConfig() (*SubscriberConfig, error) {
 func NewPublisherConfig() (*PublisherConfig, error) {
 	var pubConf PublisherConfig
 	err := LoadFromFile("pub-config.json", &pubConf)
-
 	if err != nil {
 		return nil, err
 	}
@@ -74,8 +76,15 @@ func NewPublisherConfig() (*PublisherConfig, error) {
 
 // Validate validates a publisher config
 func (pcg *PublisherConfig) Validate() error {
+	// TODO: use reflect maybe?
 	if pcg.RepoURL == "" {
 		return errors.New("Repository URL must be provided in the config")
+	}
+	if pcg.UserName == "" {
+		return errors.New("Username cannot be blank in the config")
+	}
+	if pcg.UserEmail == "" {
+		return errors.New("User Email cannot be blank in the config")
 	}
 	return nil
 }
@@ -88,5 +97,5 @@ func LoadFromFile(filename string, config interface{}) error {
 		return err
 	}
 	jsonParser := json.NewDecoder(configFile)
-	return jsonParser.Decode(&config)
+	return jsonParser.Decode(config)
 }

@@ -25,8 +25,8 @@ func (gc *GitClient) Pull(urlStr string) error {
 	// Pull the latest changes from the origin remote and merge into the current branch
 	log.Println("git pull", urlStr)
 	err = w.Pull(&git.PullOptions{RemoteName: "origin"})
-	if err == git.NoErrAlreadyUpToDate {
-		// if err is that the repo is up-to-date we ignore it
+	if err == git.NoErrAlreadyUpToDate || err == git.ErrNonFastForwardUpdate {
+		// if err is that the repo is up-to-date or a commit is done already we ignore it
 		return nil
 	}
 	return err
@@ -48,7 +48,7 @@ func (gc *GitClient) PullWithAuth(urlStr string, auth http.AuthMethod) error {
 	log.Println("git pull", urlStr)
 	err = w.Pull(&git.PullOptions{RemoteName: "origin", Auth: auth})
 
-	if err == git.NoErrAlreadyUpToDate {
+	if err == git.NoErrAlreadyUpToDate || err == git.ErrNonFastForwardUpdate {
 		// if err is that the repo is up-to-date we ignore it
 		return nil
 	}

@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
 	"github.com/moorage/cloud-hugo/pkg/utils"
 
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"

@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
-	"log"
 	"fmt"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/config"
 	"github.com/moorage/cloud-hugo/pkg/git"
-	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/publisher"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 )
@@ -66,8 +66,23 @@ func main() {
 		log.Fatalln(err)
 	}
 	fmt.Println(output)
+
+	err = gitClient.CommitAndPush(cfg.RepoURL, cfg.UserName, cfg.UserEmail,
+		&http.BasicAuth{
+			Username: cfg.UserName,
+			Password: cfg.AccessToken,
+		})
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// the backend
 	engine := gin.Default()
 	baseRouter(engine)
 	log.Println("Listening on 8080")
-	engine.Run()
+	err = engine.Run()
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
