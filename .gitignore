@@ -43,3 +43,9 @@ chugo-access.log
 # pub sub configs
 pub-config.json
 sub-config.json
+
+# old vendor 
+_vendor-20190719153221
+
+# vendor
+vendor
