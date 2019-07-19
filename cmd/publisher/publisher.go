@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+
 	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/config"
 	"github.com/moorage/cloud-hugo/pkg/git"
@@ -14,11 +15,13 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 )
 
-func baseRouter(engine *gin.Engine) *gin.RouterGroup {
-	engine.Use(cors.Default())
-	v1 := engine.Group("/api/v1")
-	v1.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+func baseRouter(e *echo.Echo) *echo.Group {
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	v1 := e.Group("/api/v1")
+	v1.GET("/health", func(c echo.Context) error {
+		return c.JSON(200, map[string]string{
 			"health": "OK",
 		})
 	})
@@ -26,7 +29,6 @@ func baseRouter(engine *gin.Engine) *gin.RouterGroup {
 }
 
 func main() {
-	gin.SetMode(gin.ReleaseMode)
 	ctx := context.Background()
 	cfg, err := config.NewPublisherConfig()
 	if err != nil {
@@ -80,11 +82,12 @@ func main() {
 	}
 
 	// the backend
-	engine := gin.Default()
-	baseRouter(engine)
-	engine.Static("/", "./frontend/dist")
+	e := echo.New()
+
+	baseRouter(e)
+	e.Static("/", "./frontend/dist/")
 	log.Println("Listening on 8080")
-	err = engine.Run()
+	err = e.Start(":8080")
 	if err != nil {
 		log.Fatalln(err)
 	}
