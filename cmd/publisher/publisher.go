@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/config"
@@ -14,6 +15,7 @@ import (
 )
 
 func baseRouter(engine *gin.Engine) *gin.RouterGroup {
+	engine.Use(cors.Default())
 	v1 := engine.Group("/api/v1")
 	v1.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -80,6 +82,7 @@ func main() {
 	// the backend
 	engine := gin.Default()
 	baseRouter(engine)
+	engine.Static("/", "./frontend/dist")
 	log.Println("Listening on 8080")
 	err = engine.Run()
 	if err != nil {
