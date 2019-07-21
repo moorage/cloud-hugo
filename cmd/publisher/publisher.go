@@ -11,7 +11,9 @@ import (
 	"github.com/moorage/cloud-hugo/pkg/builder"
 	"github.com/moorage/cloud-hugo/pkg/config"
 	"github.com/moorage/cloud-hugo/pkg/git"
+	"github.com/moorage/cloud-hugo/pkg/handlers"
 	"github.com/moorage/cloud-hugo/pkg/publisher"
+
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 )
 
@@ -81,10 +83,13 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	rqm := handlers.NewReqManager(cfg)
+
 	// the backend
 	e := echo.New()
 
-	baseRouter(e)
+	v1 := baseRouter(e)
+	v1.POST("/save_file", rqm.SaveFile)
 	e.Static("/", "./frontend/dist/")
 	log.Println("Listening on 8080")
 	err = e.Start(":8080")
