@@ -21,6 +21,11 @@ git clone --recurse-submodules -j8 git@github.com:moorage/cloud-hugo.git
 Before building anything,we use google pub/sub so create a service account with `Pub/Sub Editor` role and download the from google cloud. Rename that file to `credentials.json` and place it in the same dir as the publisher and subscriber ( both need this credential file ). 
 
 ## How to run the publisher
+
+- Ensure you're dependences are up to date
+```
+dep ensure
+```
 - Build the binary
 ```
 go build ./cmd/publisher
