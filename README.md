@@ -2,6 +2,44 @@
 
 A CMS which internally uses hugo and provides a clean and user friendly way to edit, build and deploy static sites
 
+## Pre-requsites
+
+ - npm 6.4.1
+ - node v8.16.0
+ - go 1.12.5
+ - dep
+
+# Building
+
+Below are the steps
+
+## How to run the publisher
+- Build the binary
+```
+go build ./cmd/publisher
+```
+- build the stackedit editor based frontend
+```
+cd frontend
+npm install
+npm run build
+cd ..
+```
+- run the publisher binary
+- go to `http://locahost:8080` which will open the stack edit editor for you
+
+### Configuration for publisher
+
+- a file called `pub-config.json` has to be provided in the folder same as the publisher. e.g.
+```
+{
+    "user_name": "johndoe",
+    "user_email": "johndoe@gmail.com",
+    "access_token": "<<github token>>",
+    "repo_url": " https://github.com/girishramnani/hugo-sample.git"
+}
+```
+
 ## How to run the subscriber
 
 - Build the binary
@@ -18,17 +56,17 @@ tar -xzf /tmp/caddy.tar.gz --directory /tmp
 cp /tmp/caddy ./
 ```
 - now run the `caddy` binary
-- now publish a message of kind
-```
-{
-    "git_url": "<git url>"
-}
-```
+- open a new console and run the `subscriber` binary in the same directory as `caddy`
 
 eg - https://github.com/cloudacademy/static-website-example.git
 
-- now goto [http://localhost:8081/\[repo-name\]](http://localhost:8081/static-website-example)
+- now goto [http://localhost:8081/](http://localhost:8081)
 
-### Testing update to the repo
+### Configuration for subscriber
 
-- send the same message like the one sent for cloning the repo, subscriber is smart enough to decide if a pull is needed or clone
+- a file called `sub-config.json` has to be provided in the folder same as the subscriber. e.g.
+```
+{
+    "repo_url": " https://github.com/girishramnani/hugo-sample.git"
+}
+```

@@ -3,8 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
-	"os"
 
 	"cloud.google.com/go/pubsub"
 	"github.com/moorage/cloud-hugo/pkg/config"
@@ -35,12 +33,8 @@ func main() {
 	// Start worker goroutine.
 	go subscribe(subscription, manager)
 
-	port := "8080"
-	if p := os.Getenv("PORT"); p != "" {
-		port = p
-	}
-	log.Fatal(http.ListenAndServe(":"+port, nil))
-	// [END http]
+	// for now just wait
+	select {}
 }
 
 func subscribe(subscription *pubsub.Subscription, manager *subscr.Manager) {
