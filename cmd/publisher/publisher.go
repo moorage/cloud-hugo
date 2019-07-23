@@ -59,7 +59,7 @@ func main() {
 		}
 	}
 
-	_, err = client.CreateOrInitTopic(cfg.TopicName)
+	topic, err := client.CreateOrInitTopic(cfg.TopicName)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -83,7 +83,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	rqm := handlers.NewReqManager(cfg)
+	rqm := handlers.NewReqManager(cfg, gitClient, topic, hugoBuilder)
 
 	// the backend
 	e := echo.New()

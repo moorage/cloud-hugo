@@ -58,6 +58,7 @@ func (rqm *ReqManager) pubsubWorflow() error {
 	d, err := json.Marshal(GitMsg{
 		GitURL: rqm.cfg.RepoURL,
 	})
-	_, err = rqm.topic.Publish(context.Background(), &pubsub.Message{Data: d})
+	pubr := rqm.topic.Publish(context.Background(), &pubsub.Message{Data: d})
+	_, err = pubr.Get(context.Background())
 	return err
 }
