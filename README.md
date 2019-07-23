@@ -11,7 +11,7 @@ A CMS which internally uses hugo and provides a clean and user friendly way to e
 
 # Building
 
-Below are the steps
+Before building anything,we use google pub/sub so create a service account with `Pub/Sub Editor` role and download the from google cloud. Rename that file to `credentials.json` and place it in the same dir as the publisher and subscriber ( both need this credential file ). 
 
 ## How to run the publisher
 - Build the binary
@@ -46,8 +46,7 @@ cd ..
 ```
 go build ./cmd/subscriber/
 ```
-- we use google pub/sub so create a service account with `Pub/Sub Editor` role and download the json
-- rename that file to `credentials.json` and place it in the same dir as the `subscriber` binary
+
 - run the subscriber binary from the root folder
 - download caddy by running the below commands in cloud-hugo dir or run the `./scripts/download-caddy.sh`
 ```bash
