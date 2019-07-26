@@ -2,5 +2,5 @@
     "user_name": "johndoe",
     "user_email": "johndoe@gmail.com",
     "access_token": "<<github token>>",
-    "repo_url": " https://github.com/johndoe/my-hugo-site.git"
+    "repo_url": "https://github.com/johndoe/my-hugo-site.git"
 }
