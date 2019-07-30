@@ -31,5 +31,5 @@ func (gc *GitClient) CloneOrPullWithAuth(urlStr string, auth http.AuthMethod) er
 			return err
 		}
 	}
-	return gc.Pull(urlStr)
+	return gc.PullWithAuth(urlStr, auth)
 }
