@@ -60,17 +60,6 @@ go build ./cmd/subscriber/
 ```
 
 - run the subscriber binary from the root folder
-- download caddy by running the below commands in cloud-hugo dir or run the `./scripts/download-caddy.sh`
-```bash
-wget -O /tmp/caddy.tar.gz https://caddyserver.com/download/linux/amd64?license=personal
-tar -xzf /tmp/caddy.tar.gz --directory /tmp
-cp /tmp/caddy ./
-```
-- now run the `caddy` binary
-- open a new console and run the `subscriber` binary in the same directory as `caddy`
-
-eg - https://github.com/cloudacademy/static-website-example.git
-
 - now goto [http://localhost:8081/](http://localhost:8081)
 
 ### Configuration for subscriber
