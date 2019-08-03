@@ -1,4 +1,4 @@
-
+node_modules
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -49,3 +49,9 @@ _vendor-20190719153221
 
 # vendor
 vendor
+
+# www
+www
+
+# config files
+config

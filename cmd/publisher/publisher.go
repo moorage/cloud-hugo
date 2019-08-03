@@ -42,7 +42,6 @@ func main() {
 
 	log.Println("Initial Website sync")
 	if cfg.AccessToken != "" && cfg.UserName != "" {
-		log.Println("Cloning with token")
 		err := gitClient.CloneOrPullWithAuth(cfg.RepoURL,
 			&http.BasicAuth{
 				Username: cfg.UserName,

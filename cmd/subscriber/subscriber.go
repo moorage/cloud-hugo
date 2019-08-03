@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"net/http"
 
 	"cloud.google.com/go/pubsub"
 	"github.com/moorage/cloud-hugo/pkg/config"
@@ -33,8 +35,11 @@ func main() {
 	// Start worker goroutine.
 	go subscribe(subscription, manager)
 
-	// for now just wait
-	select {}
+	fs := http.FileServer(http.Dir(cfg.HostingDir))
+	http.Handle("/", fs)
+
+	log.Printf("Listening on %s\n", cfg.SubPort)
+	http.ListenAndServe(fmt.Sprintf(":%s", cfg.SubPort), nil)
 }
 
 func subscribe(subscription *pubsub.Subscription, manager *subscr.Manager) {

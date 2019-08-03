@@ -23,6 +23,7 @@ type SubscriberConfig struct {
 	HostingDir  string `default:"./www"`
 	AccessToken string `json:"access_token"`
 	UserName    string `json:"user_name"`
+	SubPort     string `default:"8081"`
 }
 
 // PublisherConfig is the config for the publisher
@@ -35,13 +36,14 @@ type PublisherConfig struct {
 	AccessToken string `json:"access_token"`
 	UserName    string `json:"user_name"`
 	UserEmail   string `json:"user_email"`
+	PubPort     string `default:"8080"`
 }
 
 // NewSubsciberConfig creates a Config struct populating the Config with env variables having prefix
 // "CHUGO_SUB"
 func NewSubsciberConfig() (*SubscriberConfig, error) {
 	var subConf SubscriberConfig
-	err := LoadFromFile("sub-config.json", &subConf)
+	err := LoadFromFile("config/sub-config.json", &subConf)
 
 	if err != nil {
 		return nil, err
@@ -58,7 +60,7 @@ func NewSubsciberConfig() (*SubscriberConfig, error) {
 // "CHUGO_PUB"
 func NewPublisherConfig() (*PublisherConfig, error) {
 	var pubConf PublisherConfig
-	err := LoadFromFile("pub-config.json", &pubConf)
+	err := LoadFromFile("config/pub-config.json", &pubConf)
 	if err != nil {
 		return nil, err
 	}
