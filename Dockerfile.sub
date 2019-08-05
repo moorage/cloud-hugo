@@ -1,0 +1,17 @@
+FROM golang:alpine
+
+ENV GOPATH=/go/src
+
+RUN apk -U add ca-certificates
+WORKDIR /go/src/github.com/moorage/cloud-hugo
+ADD ./pkg
+ADD ./vendor
+ADD ./cmd
+ADD ./Gopkg.lock
+ADD ./Gopkg.toml
+
+RUN apk -U add ca-certificates
+
+RUN go build ./cmd/subscriber
+
+ENTRYPOINT ["./subscriber"]

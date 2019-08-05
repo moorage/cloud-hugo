@@ -1,0 +1,19 @@
+FROM golang:alpine
+
+ENV PORT=8080
+
+WORKDIR /go/src/github.com/moorage/cloud-hugo
+ADD ./pkg
+ADD ./vendor
+ADD ./cmd
+ADD ./frontend
+ADD ./Gopkg.lock
+ADD ./Gopkg.toml
+
+RUN apk -U add ca-certificates
+
+RUN go build ./cmd/publisher
+
+EXPOSE 8080
+
+ENTRYPOINT ["./publisher"]

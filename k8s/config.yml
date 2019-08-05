@@ -1,0 +1,28 @@
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: clugo-config
+apiVersion: v1
+data:
+  pub-config.json: |-
+    {
+        "project_id": "cloud-hugo-test",
+        "topic_name": "chugo-run-requests",
+        "env": "dev",
+        "pub_port": "8080",
+        "user_name": "girishramnani",
+        "user_email": "girishramnani95@gmail.com",
+        "access_token": "${GITHUB_ACCESS_TOKEN}",
+        "repo_url": " https://github.com/girishramnani/hugo-sample-private.git"
+    }
+  sub-config.json: |-
+    {
+        "project_id": "cloud-hugo-test",
+        "topic_name": "chugo-run-requests",
+        "env": "dev",
+        "sub_port": "8081",
+        "user_name": "girishramnani",
+        "user_email": "girishramnani95@gmail.com",
+        "access_token": "#{GITHUB_ACCESS_TOKEN}",
+        "repo_url": " https://github.com/girishramnani/hugo-sample-private.git"
+    }

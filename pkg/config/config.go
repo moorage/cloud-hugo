@@ -10,7 +10,7 @@ import (
 
 // CommonConfig is the global config used through out the application, both the publisher and subscriber
 type CommonConfig struct {
-	CredFile  string `default:"credentials.json"`
+	CredFile  string `default:"config/credentials.json"`
 	ProjectID string `default:"cloud-hugo-test"`
 	TopicName string `default:"chugo-run-requests"`
 	Env       string `default:"dev"`

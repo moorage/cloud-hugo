@@ -13,7 +13,7 @@ node_modules
 *.out
 
 # the google cloud pub sub credentials
-credentials.json
+config/credentials.json
 
 # the binaries
 chugo
@@ -55,3 +55,6 @@ www
 
 # config files
 config
+
+# secret file
+k8s/secret.yml

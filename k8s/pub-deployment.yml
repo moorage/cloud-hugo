@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: news
+  labels: {app: publisher}
+spec:
+  replicas: 1
+  template:
+    metadata: {labels: {app: publisher}}
+    spec:
+      containers:
+      - name: news
+        image: gcr.io/clugo/publisher:${TAG}
+        command:
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: pub-config
+            mountPath: /go/src/github.com/moorage/cloud-hugo/config/pub-config.json
+            subPath: pub-config.json
+      volumes:
+        - name: pub-config
+          configMap: { name: clugo-config }
