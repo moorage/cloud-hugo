@@ -8,10 +8,10 @@ buildFront:
 	cd frontend && npm install && npm run build
 
 buildPub: buildFront
-	go build ./cmd/publisher
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"'  ./cmd/publisher
 
 buildSub:
-	go build ./cmd/subscriber
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"'  ./cmd/subscriber
 
 createCluster: 
 	gcloud config set project ${GOOGLE_PROJECTID}
