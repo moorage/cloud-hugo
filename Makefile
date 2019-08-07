@@ -3,6 +3,9 @@
 export TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 export GOOGLE_PROJECTID?="cloud-hugo-test"
 export GITHUB_USERNAME?="girishramnani"
+export GITHUB_ACCESS_TOKEN?="token"
+export GITHUB_EMAIL?="girishramnani95@gmail.com"
+export REPO_URL?="https://github.com/girishramnani/hugo-sample.git"
 
 buildFront:
 	cd frontend && npm install && npm run build
@@ -29,3 +32,15 @@ pack: build docker
 upload: pack
 	docker push gcr.io/${GOOGLE_PROJECTID}/publisher:$(TAG)
 	docker push gcr.io/${GOOGLE_PROJECTID}/subscriber:$(TAG)
+
+deploySecret:
+	kubectl create configmap clugo-secret --from-file=config/credentials.json
+
+deployConfig:
+	envsubst < k8s/config.yml | kubectl apply -f -
+
+deployPub:
+	envsubst < k8s/pub-deployment.yml
+
+deploySub:
+	envsubst < k8s/sub-autoscaling.yml | kubectl apply -f - 
