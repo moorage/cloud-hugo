@@ -1,17 +1,16 @@
 
 
-TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
-export TAG
+export TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
+export GOOGLE_PROJECTID?="cloud-hugo-test"
+export GITHUB_USERNAME?="girishramnani"
 
-build_front:
-	cd frontend
-	npm install
-	npm run build
+buildFront:
+	cd frontend && npm install && npm run build
 
-build_pub: build_front
+buildPub: buildFront
 	go build ./cmd/publisher
 
-build_sub:
+buildSub:
 	go build ./cmd/subscriber
 
 createCluster: 
@@ -19,12 +18,14 @@ createCluster:
 	gcloud container clusters create ${GOOGLE_PROJECTID}-cluster  --zone "us-central1-a" --no-enable-basic-auth --cluster-version "1.12.8-gke.10" --machine-type "n1-standard-1"
 
 
-build: build_pub build_sub
+build: buildPub buildSub
 
-pack: build_pub build_sub
-	docker build -f Dockerfile.pub -t gcr.io/clugo/publisher:$(TAG) .
-	docker build -f Dockerfile.sub -t gcr.io/clugo/subscriber:$(TAG) .
+docker: 
+	docker build -f Dockerfile.pub -t gcr.io/${GOOGLE_PROJECTID}/publisher:$(TAG) .
+	docker build -f Dockerfile.sub -t gcr.io/${GOOGLE_PROJECTID}/subscriber:$(TAG) .
+
+pack: build docker
 
 upload: pack
-	docker push gcr.io/clugo/publisher:$(TAG)
-	docker push gcr.io/clugo/subscriber:$(TAG)
+	docker push gcr.io/${GOOGLE_PROJECTID}/publisher:$(TAG)
+	docker push gcr.io/${GOOGLE_PROJECTID}/subscriber:$(TAG)

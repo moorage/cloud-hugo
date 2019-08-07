@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "subscriber"
+  namespace: "default"
+  labels:
+    app: "subscriber"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "subscriber"
+  template:
+    metadata:
+      labels:
+        app: "subscriber"
+    spec:
+      containers:
+      - name: "subscriber"
+        image: "gcr.io/cloud-hugo-test/subscriber:a374ae8"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "subscriber-hpa"
+  namespace: "default"
+  labels:
+    app: "subscriber"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "subscriber"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
