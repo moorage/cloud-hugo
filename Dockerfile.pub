@@ -3,7 +3,7 @@ FROM golang:1.12-alpine
 ENV PORT=8080
 
 WORKDIR /go/src/github.com/moorage/cloud-hugo
-RUN apk -U add ca-certificates
+RUN apk -U add ca-certificates hugo
 ADD ./frontend/dist ./frontend/dist
 ADD ./publisher ./publisher
 
