@@ -1,23 +1,44 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: news
+  name: publisher
   labels: {app: publisher}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: "publisher"
   template:
     metadata: {labels: {app: publisher}}
     spec:
       containers:
-      - name: news
-        image: gcr.io/clugo/publisher:${TAG}
-        command:
+      - name: publisher
+        image: gcr.io/cloud-hugo-test/publisher:${TAG}
         ports:
           - containerPort: 8080
         volumeMounts:
           - name: pub-config
             mountPath: /go/src/github.com/moorage/cloud-hugo/config/pub-config.json
             subPath: pub-config.json
+          - name: clugo-secret
+            mountPath: /go/src/github.com/moorage/cloud-hugo/config/credentials.json
+            subPath: credentials.json     
       volumes:
         - name: pub-config
           configMap: { name: clugo-config }
+        - name: clugo-secret
+          configMap: { name: clugo-secret }
+      
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: publisher
+spec:
+  type: LoadBalancer
+  selector:
+    app: publisher
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

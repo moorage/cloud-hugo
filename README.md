@@ -45,9 +45,13 @@ cd ..
 - a file called `pub-config.json` has to be provided in the folder same as the publisher. e.g.
 ```
 {
-    "user_name": "johndoe",
-    "user_email": "johndoe@gmail.com",
-    "access_token": "<<github token>>",
+    "project_id": "cloud-hugo-test",
+    "topic_name": "chugo-run-requests",
+    "env": "dev",
+    "pub_port": "8080",
+    "user_name": "<<username>>",
+    "user_email": "<<email>>",
+    "access_token": "<<token>>",
     "repo_url": " https://github.com/girishramnani/hugo-sample.git"
 }
 ```
@@ -64,9 +68,39 @@ go build ./cmd/subscriber/
 
 ### Configuration for subscriber
 
-- a file called `sub-config.json` has to be provided in the folder same as the subscriber. e.g.
+- a file called `config/sub-config.json` has to be provided in the folder same as the subscriber. e.g.
 ```
 {
+    "project_id": "cloud-hugo-test",
+    "topic_name": "chugo-run-requests",
+    "env": "dev",
+    "sub_port": "8080",
+    "user_name": "<<username>>",
+    "user_email": "<<email>>",
+    "access_token": "<<token>>",
     "repo_url": " https://github.com/girishramnani/hugo-sample.git"
 }
 ```
+
+# Deploying to kubernetes
+
+The files related to kubernetes are present in `k8s/` - 
+
+- `config.yml` - This file holds the pub-config and sub-config we populate with environment variables
+- `pub-deployment.yml` - the publisher deployment config
+- `sub-autoscaling-yml` - the autoscaling deployment for subscriber
+
+to build and push and run all the stuff on kuberenetes -
+
+1 - set all env variable present in the `Makefile` 
+```
+export GOOGLE_PROJECTID?=cloud-hugo-test
+export GITHUB_USERNAME?=<<username>>
+export GITHUB_ACCESS_TOKEN?=<<token>>
+export GITHUB_EMAIL?=<<email>>
+export REPO_URL?=<<repo_url>>
+```
+
+2 - add the `credentials.json` (this is the google cloud creds for pub sub) in the `config/` folder 
+
+2 - `make deploy`

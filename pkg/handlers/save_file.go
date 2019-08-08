@@ -55,9 +55,20 @@ func (rqm *ReqManager) pubsubWorflow() error {
 			Password: rqm.cfg.AccessToken,
 		})
 
+	log.Println("Error while pushing:", err.Error())
+
+	if err != nil {
+		return err
+	}
+
 	d, err := json.Marshal(GitMsg{
 		GitURL: rqm.cfg.RepoURL,
 	})
+
+	if err != nil {
+		return err
+	}
+
 	pubr := rqm.topic.Publish(context.Background(), &pubsub.Message{Data: d})
 	_, err = pubr.Get(context.Background())
 	return err

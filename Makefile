@@ -2,10 +2,10 @@
 
 export TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 export GOOGLE_PROJECTID?=cloud-hugo-test
-export GITHUB_USERNAME?=girishramnani
-export GITHUB_ACCESS_TOKEN?=token
-export GITHUB_EMAIL?=girishramnani95@gmail.com
-export REPO_URL?=https://github.com/girishramnani/hugo-sample.git
+export GITHUB_USERNAME?=<<username>>
+export GITHUB_ACCESS_TOKEN?=<<token>>
+export GITHUB_EMAIL?=<<email>>
+export REPO_URL?=<<repo_url>>
 
 createCluster: 
 	gcloud config set project ${GOOGLE_PROJECTID}
