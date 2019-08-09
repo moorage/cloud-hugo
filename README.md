@@ -30,13 +30,6 @@ dep ensure
 ```
 go build ./cmd/publisher
 ```
-- build the stackedit editor based frontend
-```
-cd frontend
-npm install
-npm run build
-cd ..
-```
 - run the publisher binary
 - go to `http://locahost:8080` which will open the stack edit editor for you
 
@@ -104,11 +97,3 @@ export REPO_URL?=<<repo_url>>
 2 - add the `credentials.json` (this is the google cloud creds for pub sub) in the `config/` folder 
 
 3 - `make deploy`
-
-## build the frontend
-
-Currently we ship a prebuild frontend which is part of the repo as a submodule in the folder "frontend".
-In case you ever want build the frontend because you have changed something the you can do so by
-```
-make buildFront
-```
