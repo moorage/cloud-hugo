@@ -11,9 +11,6 @@ createCluster:
 	gcloud config set project ${GOOGLE_PROJECTID}
 	gcloud container clusters create ${GOOGLE_PROJECTID}-cluster  --zone "us-central1-a" --no-enable-basic-auth --cluster-version "1.12.8-gke.10" --machine-type "n1-standard-1"
 
-buildFront:
-	cd frontend && npm install && npm run build
-
 buildPub:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -ldflags '-w -extldflags "-static"'  ./cmd/publisher
 
