@@ -89,6 +89,7 @@ func main() {
 
 	v1 := baseRouter(e)
 	v1.POST("/save_file", rqm.SaveFile)
+	v1.GET("/listdir", rqm.ListDir)
 	e.Static("/", "./frontend/dist/")
 	log.Println("Listening on 8080")
 	err = e.Start(":8080")

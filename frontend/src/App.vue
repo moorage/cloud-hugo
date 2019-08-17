@@ -14,19 +14,33 @@
       
     </v-app-bar>
 
-    <v-content>
-      <HelloWorld/>
+    <v-content style="height: 100%">
+      <v-row no-gutters style="height: 100%" align="stretch">
+        <v-col md="auto">
+          <v-card
+            class="pa-2"
+            outlined
+            tile
+          >
+            Variable width contentjlsdkfjsdlkf
+          </v-card>
+        </v-col>
+        <v-col>
+          <MdeEditor/>
+        </v-col>
+      </v-row>
+      
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import MdeEditor from './components/MdeEditor.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    MdeEditor,
   },
   data: () => ({
     //
